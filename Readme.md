@@ -24,7 +24,17 @@ This project requires the following:
 - FFMPEG : You could download chocolatey and run 'choco install ffmpeg' or get it some other way.
 - Pytorch (Optimally CUDA version if you have an NVIDIA GPU) using this pip command that you can customize through https://pytorch.org/get-started/locally/:
     pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-- Important: Make sure your Virtual Environment folder is named 'venv', since text-to-speech.py needs to run using that directory with python.exe and the packages within it.
+- Important:
+      Make sure your Virtual Environment folder is named 'venv', since text-to-speech.py needs to run using that directory with python.exe and the packages within it.
+      ! Currently, PyTorch on Windows only supports Python 3.8-3.11; Python 2.x is not supported.
+      Install python 3.11 : winget install 'python3.11'
+      then make a virtual environemt with it:
+      python3.11 -m venv venv
+  Make sure your newly installed python version was added to Environemnt Variables in user Variable -> PATH liek shown in the screenshot bellow.
+  ![image](https://github.com/user-attachments/assets/845815ba-6633-469a-a4c9-6b8fc06dda55)
+
+
+
 - And of course, use : 
     pip install requirements.txt 
 
