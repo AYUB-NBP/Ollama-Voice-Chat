@@ -30,9 +30,6 @@ import os
 venv = 'venv'
 
 def main():
-        #Delete Audio files used for Voice recognition and TTS
-        clean_up()
-
         state = is_process_running('ollama.exe')
         if state:    
             print("Welcome to Ollama live chat. Type 'exit()' to stop chatting.\n -----------------------------------------------")
@@ -61,6 +58,8 @@ def run_Ollama():
         processes = ['ollama.exe','ollama_llama_server.exe','ollama app.exe','WindowsTerminal.exe','python.exe']
         for process in processes:
             kill_process_by_name(process)
+        #Delete Audio files used for Voice recognition and TTS
+        clean_up()
         sys.exit(0)
     elif prompt == None or prompt == '' or prompt == 'you':
         run_Ollama()
