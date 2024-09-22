@@ -56,10 +56,11 @@ def run_Ollama():
 
     if prompt.lower() == 'exit()':
         processes = ['ollama.exe','ollama_llama_server.exe','ollama app.exe','WindowsTerminal.exe','python.exe']
+        clean_up()
         for process in processes:
             kill_process_by_name(process)
         #Delete Audio files used for Voice recognition and TTS
-        clean_up()
+        
         sys.exit(0)
     elif prompt == None or prompt == '' or prompt == 'you':
         run_Ollama()
