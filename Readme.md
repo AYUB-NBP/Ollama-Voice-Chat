@@ -35,8 +35,8 @@ This project requires the following:
 
 
 
-- And of course, use : 
-    pip install requirements.txt 
+- And finally, use : 
+    pip install -r requirements.txt 
 
 USAGE
 
