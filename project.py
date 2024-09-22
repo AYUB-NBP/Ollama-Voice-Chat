@@ -36,7 +36,9 @@ def main():
             run_Ollama()
         else :
             subprocess.Popen('server.bat')
+            
             run_Ollama()
+            
 
 def is_process_running(process_name):
     # Iterate over all running processes
@@ -49,44 +51,47 @@ def kill_process_by_name(process_name):
     subprocess.run(['taskkill', '/F', '/IM', process_name])
 
 def run_Ollama():
-    prompt = voice_recognition.main()
+    try: #Preventing an ugly exception from appearing after CTRL+C
+        prompt = voice_recognition.main()
 
-    if not prompt:
-        prompt = input('User: ').strip()
+        if not prompt:
+            prompt = input('User: ').strip()
 
-    if prompt.lower() == 'exit()':
-        processes = ['ollama.exe','ollama_llama_server.exe','ollama app.exe','WindowsTerminal.exe','python.exe']
-        clean_up()
-        for process in processes:
-            kill_process_by_name(process)
+        if prompt.lower() == 'exit()':
+            processes = ['ollama.exe','ollama_llama_server.exe','ollama app.exe','WindowsTerminal.exe','python.exe']
+            clean_up()
+            for process in processes:
+                kill_process_by_name(process)
+            #Delete Audio files used for Voice recognition and TTS
+            
+            sys.exit(0)
+        elif prompt == None or prompt == '' or prompt == 'you':
+            run_Ollama()
+        #MAIN BIT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        stream = ollama.chat(model='llama3.1:8b' ,messages=[{'role': 'user', 'content': prompt}],stream=True)
+        full_response=[] #Initialising word list
+        for chunk in stream:
+            word = chunk['message']['content']
+            print(word, end='', flush=True)
+            full_response.append(word)
+        print('\n')
+        response_string = ''.join(str(x) for x in full_response).replace('*','')
+
+        #TTS part
+        subprocess.run(f"""{venv}\\Scripts\\python.exe text_to_speech.py {response_string}""")
+
+        #play the TTS
+        try:
+            play_audio()
+        except KeyboardInterrupt:
+            run_Ollama()
+
         #Delete Audio files used for Voice recognition and TTS
+        clean_up()
         
-        sys.exit(0)
-    elif prompt == None or prompt == '' or prompt == 'you':
-        run_Ollama()
-    #MAIN BIT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    stream = ollama.chat(model='llama3.1:8b' ,messages=[{'role': 'user', 'content': prompt}],stream=True)
-    full_response=[] #Initialising word list
-    for chunk in stream:
-        word = chunk['message']['content']
-        print(word, end='', flush=True)
-        full_response.append(word)
-    print('\n')
-    response_string = ''.join(str(x) for x in full_response).replace('*','')
-
-    #TTS part
-    subprocess.run(f"""{venv}\\Scripts\\python.exe text_to_speech.py {response_string}""")
-
-    #play the TTS
-    try:
-        play_audio()
+        run_Ollama() #loop all the way back to the beginning
     except KeyboardInterrupt:
-        run_Ollama()
-
-    #Delete Audio files used for Voice recognition and TTS
-    clean_up()
-    
-    run_Ollama() #loop all the way back to the beginning
+        pass
 
 def play_audio():
     # Run ffplay in a subprocess
