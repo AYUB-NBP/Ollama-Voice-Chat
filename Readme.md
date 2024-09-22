@@ -23,8 +23,7 @@ This project requires the following:
 - Download and install Ollama on your machine :https://ollama.com/
 - To download a Language model, Run in cmd: `ollama run llama3.1:8b`
 - FFMPEG : You could download chocolatey and run `choco install ffmpeg` or get it some other way.
-- And finally, use : 
-    `pip install -r requirements.txt`
+-  ` pip install -r requirements.txt`
 - Pytorch (Optimally CUDA version if you have an NVIDIA GPU) using this pip command that you can customize through https://pytorch.org/get-started/locally/:
     `pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124`
 - Important:
@@ -32,7 +31,6 @@ This project requires the following:
       ! Currently, PyTorch on Windows only supports Python 3.8-3.11; Python 2.x is not supported.
       Install python 3.10 then make a virtual environemt with it.
       
-
   Use `pip install --upgrade setuptools wheel` in case you encounter the following error:
   
   `× Getting requirements to build wheel did not run successfully.
@@ -41,5 +39,9 @@ This project requires the following:
 ## USAGE
 
 - Run `project.py`
+- Press and hold 'Left Shift' then speak, on release an answer will be generated in text then spoken outloud.
+- If you press 'Escape' you'll be able to text chat with the bot.
+- CTRL+C to interrupt audio.
+- Type exit() and Enter to close the script.
 
 Thank you [edx](https://www.edx.org/cs50) and [the Harvard University](https://cs50.harvard.edu/)
