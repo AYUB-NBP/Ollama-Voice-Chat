@@ -39,7 +39,7 @@ This project requires the following:
 ## USAGE
 
 - Run `project.py`
-  #### To avoid a long unnecessary message concerning Whisper and Torch, CTRL+CLICK on the code line in the image bellow:
+  #### To get rid of a long unnecessary message concerning Whisper and Torch, CTRL+CLICK on the code line in the image bellow:
   ![image](https://github.com/user-attachments/assets/6184bf20-e385-48ba-a8bf-2dd27e6d753b)
   #### Then add the argument underlined in green:
   ![image](https://github.com/user-attachments/assets/505ce6bc-a31d-40df-a479-a14a9052b876)
