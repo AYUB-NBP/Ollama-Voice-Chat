@@ -1,20 +1,15 @@
 # Ollama Python Chat Bot with Voice Recognition and TTS
 
-*As impressive as AI chatbots were at first, conversing with them vocally on the ChatGPT app on the phone took it to the next level.*
-
-*I mainly use the computer and not much of a phone user other than some Youtube binging sometimes.*
-
-*I knew I wanted that capability to just be able to speak to a ChatBOt on a whim to discuss something on my mind and process ideas in an interractive way.*
-
-*When I started coding this and got to the TTS part, I also needed to find voices that were not as robotic as the typical Google or Microsoft default voices.*
-
-*Thank to ChatBots themselves, I learned how to solve many problems along the way, building this project one piece at a time.*
-
-*It only took a plan, and a systematic approach to complement things to eachother like a puzzle.*
-
-*To start being technical, this project is based on Ollama for the AI server and LLMs that come with it specifically, I went with Llama3.1:8b.*
-
-*I tried using GGUFs I had downloaded before with Llama.CPP but it was just too much for me as I struggled to compile source code at first. But I learned a lot even though I didn't end up going with it.*
+This project is my attempt to recreate the voice-chat feature found on the smartphone version of OpenAI's ChatGPT.
+I tried unsing llama.cpp but I ended up using Ollama to run their already curated GGUF LLMs (I chose Llama3.1)
+This python script, takes your voice input or a text prompt, sends it to the localhost URL where Ollama is running, and then returns a series of words/chunks that are then printed one after the other.
+WHen using the voice recognition feature, a sound file is recorded while holding the 'left shift' button and on release is then saved to the root directory.
+Right after that, the voice is converted to text using 'whisper' a library that recognizes both the text and detects the language (I didn't use it for that, used langdetect instead in the text_to_speech module.).
+The transcript is then fed as normal text to the Ollama server as if it were typed, and the response is served.
+After each response, the script reads the content of it using the module 'edge_tts'. Like I said earlier, language detection is performed on this level and the narration voice is then chosen accordingly.
+The prompting keeps going in a loop after each response, until the user exits.
+Upon exit a function called 'clean_up' deletes any remenants of the recorded user's voice and the chat-bot's audio response.
+I'm not yet satisfied untill I manage to add short memory context, and store history of older conversations to make the chat-bot's experience customised to the user.
 
 ## INSTALLATION
 
