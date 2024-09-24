@@ -1,5 +1,5 @@
 # Ollama Python Chat Bot with Voice Recognition and TTS
-### [Video Demo]([https://youtu.be/SBLkdHhrjp8](https://youtu.be/a1BGg6XoiQ8?si=5tQEy0_8Blsf2NFf))
+### [Video Demo](https://youtu.be/a1BGg6XoiQ8?si=5tQEy0_8Blsf2NFf)
 #### Description:
 This project is my attempt to recreate the voice-chat feature found on the smartphone version of OpenAI's ChatGPT.
 
