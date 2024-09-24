@@ -18,9 +18,6 @@ def main():
         transcript = transcribe_audio(filename)
         return transcript
     
-    
-
-
 # Set parameters for audio recording
 sample_rate = 16000  # Sample rate for Whisper (16kHz)
 
@@ -32,7 +29,7 @@ def record_audio(filename):
     # Start recording when left shift is pressed
     while True:
         if keyboard.is_pressed('left shift'):
-            # print("Recording started... (Release left shift to stop)")
+            print("Recording (Release left shift to stop)\n")
             with sd.InputStream(samplerate=sample_rate, channels=1, dtype=np.int16) as stream:
                 while keyboard.is_pressed('left shift'):
                     data, _ = stream.read(1024)  # Read chunks of data

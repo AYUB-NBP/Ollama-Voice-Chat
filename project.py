@@ -32,13 +32,23 @@ venv = 'venv'
 def main():
         state = is_process_running('ollama.exe')
         if state:    
-            print("Welcome to Ollama live chat. Type 'exit()' to stop chatting.\n -----------------------------------------------")
+            print("Welcome to Ollama live chat. Type 'exit()' to stop chatting or use CTRL+C \n -----------------------------------------------")
             run_Ollama()
         else :
             subprocess.Popen('server.bat')
             
             run_Ollama()
             
+def ollama_server(prompt):
+        stream = ollama.chat(model='llama3.1:8b' ,messages=[{'role': 'user', 'content': prompt}],stream=True)
+        full_response=[] #Initialising word list
+        for chunk in stream:
+            word = chunk['message']['content']
+            print(word, end='', flush=True)
+            full_response.append(word)
+        print('\n')
+        response_string = ''.join(str(x) for x in full_response).replace('*','')
+        return response_string
 
 def is_process_running(process_name):
     # Iterate over all running processes
@@ -68,15 +78,7 @@ def run_Ollama():
         elif prompt == None or prompt == '' or prompt == 'you':
             run_Ollama()
         #MAIN BIT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        stream = ollama.chat(model='llama3.1:8b' ,messages=[{'role': 'user', 'content': prompt}],stream=True)
-        full_response=[] #Initialising word list
-        for chunk in stream:
-            word = chunk['message']['content']
-            print(word, end='', flush=True)
-            full_response.append(word)
-        print('\n')
-        response_string = ''.join(str(x) for x in full_response).replace('*','')
-
+        response_string = ollama_server(prompt)
         #TTS part
         subprocess.run(f"""{venv}\\Scripts\\python.exe text_to_speech.py {response_string}""")
 
@@ -91,7 +93,13 @@ def run_Ollama():
         
         run_Ollama() #loop all the way back to the beginning
     except KeyboardInterrupt:
-        pass
+        print('Goodbye!')
+        sys.exit(0)
+    
+    if response_string:
+        return True #Response 
+    else:
+        return False
 
 def play_audio():
     # Run ffplay in a subprocess
