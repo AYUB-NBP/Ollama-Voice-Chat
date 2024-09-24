@@ -39,11 +39,11 @@ def main():
             
             run_Ollama()
             
-def ollama_server(prompt):
-        stream = ollama.chat(model='llama3.1:8b' ,messages=[{'role': 'user', 'content': prompt}],stream=True)
+def ollama_server(_prompt):
+        stream = ollama.generate(model='llama3.1:8b' ,prompt=_prompt,stream=True,context=[1, 2, 3])
         full_response=[] #Initialising word list
         for chunk in stream:
-            word = chunk['message']['content']
+            word = chunk['response']
             print(word, end='', flush=True)
             full_response.append(word)
         print('\n')
@@ -94,6 +94,7 @@ def run_Ollama():
         run_Ollama() #loop all the way back to the beginning
     except KeyboardInterrupt:
         print('Goodbye!')
+        clean_up()
         sys.exit(0)
     
     if response_string:
@@ -103,7 +104,7 @@ def run_Ollama():
 
 def play_audio():
     # Run ffplay in a subprocess
-    subprocess.run(r'ffplay -nodisp -autoexit -loglevel quiet "tts.mp3"')
+    subprocess.call(r'ffplay -nodisp -autoexit -loglevel quiet "tts.mp3"')
 def clean_up():
     audio_files = ['recorded_audio.wav','tts.mp3']
     for file in audio_files:
