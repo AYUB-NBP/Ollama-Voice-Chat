@@ -47,6 +47,6 @@ This project requires the following:
 - Press and hold 'Left Shift' then speak, on release an answer will be generated in text then spoken outloud.
 - If you press 'Escape' you'll be able to text chat with the bot.
 - CTRL+C to interrupt audio.
-- Type exit() and Enter to close the script.
+- You can type exit() and Enter to close the script.
 
 Thank you [edx](https://www.edx.org/cs50) and [the Harvard University](https://cs50.harvard.edu/)
