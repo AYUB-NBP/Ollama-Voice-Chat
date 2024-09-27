@@ -12,7 +12,7 @@ Right after that, the voice is converted to text using 'whisper' a library that 
 
 The transcript is then fed as normal text to the Ollama server as if it were typed, and the response is served.
 
-After each response, the script reads the content of it using the module 'edge_tts'. Like I said earlier, language detection is performed on this level and the narration voice is then chosen accordingly.
+After each response, the script reads the content of it using the module 'edge_tts'. Like I said earlier,(not using whisper to detect language at voice-to-text phase) language detection is performed on this level and the narration voice is then chosen accordingly.
 
 The prompting keeps going in a loop after each response, until the user exits.
 
