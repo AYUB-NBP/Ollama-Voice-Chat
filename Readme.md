@@ -16,7 +16,7 @@ After each response, the script reads the content of it using the module 'edge_t
 
 The prompting keeps going in a loop after each response, until the user exits.
 
-Upon exit a function called 'clean_up' deletes any remenants of the recorded user's voice and the chat-bot's audio response.
+Upon exit, a function called 'clean_up' deletes any remenants of the recorded user's voice and the chat-bot's audio response.
 
 I'm not yet satisfied untill I manage to add short memory context, and store history of older conversations to make the chat-bot's experience customised to the user.
 
